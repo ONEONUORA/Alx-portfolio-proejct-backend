@@ -22,7 +22,17 @@ const allowedOrigin = process.env.ALLOWED_ORIGIN;
 // app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors({ origin: allowedOrigin }));
+// app.use(cors({ origin: allowedOrigin }));
+app.use(cors({
+    origin: process.env.ALLOWED_ORIGIN ,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+  }));
+  
+  // Handle preflight requests
+  app.options('*', cors({
+    origin: process.env.ALLOWED_ORIGIN,
+  }));
 
 // Temporary storage for verification codes
 const users = {};
