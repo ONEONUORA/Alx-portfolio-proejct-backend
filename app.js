@@ -9,7 +9,7 @@ import jwt from 'jsonwebtoken';
 import { nanoid } from "nanoid";
 import cors from "cors";
 import 'dotenv/config';
-import bcrypt from 'bcrypt';
+import bcrypt from 'bcryptjs';
 
 
 
