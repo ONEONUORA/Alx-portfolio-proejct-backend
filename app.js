@@ -18,9 +18,11 @@ import UserModel from "./models/UserModel.js";
 
 
 const app = express();
-app.use(cors());
+const allowedOrigin = process.env.ALLOWED_ORIGIN;
+// app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cors({ origin: allowedOrigin }));
 
 // Temporary storage for verification codes
 const users = {};
