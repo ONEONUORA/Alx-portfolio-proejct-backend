@@ -18,21 +18,16 @@ import UserModel from "./models/UserModel.js";
 
 
 const app = express();
-const allowedOrigin = process.env.ALLOWED_ORIGIN;
-// app.use(cors());
 app.use(express.json());
 app.use(bodyParser.json());
-// app.use(cors({ origin: allowedOrigin }));
-app.use(cors({
-    origin: process.env.ALLOWED_ORIGIN ,
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization']
-  }));
+
+const corsOptions = {
+    origin: process.env.CORS_ORIGIN,
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+    credentials: true 
+  };
   
-  // Handle preflight requests
-  app.options('*', cors({
-    origin: process.env.ALLOWED_ORIGIN,
-  }));
+app.use(cors(corsOptions));
 
 // Temporary storage for verification codes
 const users = {};
