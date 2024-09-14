@@ -17,11 +17,16 @@ import bcrypt from 'bcryptjs';
 import UserModel from "./models/UserModel.js";
 
 
-const allowedOrigin = process.env.ALLOWED_ORIGIN;
+
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
-app.use(cors({ origin: allowedOrigin }));
+const allowedOrigin = process.env.ALLOWED_ORIGIN || 'https://token-flow.netlify.app';
+app.use(cors({
+  origin: allowedOrigin,
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Add the methods you expect to use
+  credentials: true, // Include this if you need cookies/auth headers sent
+}));
 
 
 
