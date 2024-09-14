@@ -17,17 +17,13 @@ import bcrypt from 'bcryptjs';
 import UserModel from "./models/UserModel.js";
 
 
+const allowedOrigin = process.env.ALLOWED_ORIGIN;
 const app = express();
 app.use(express.json());
 app.use(bodyParser.json());
+app.use(cors({ origin: allowedOrigin }));
 
-const corsOptions = {
-    origin: process.env.CORS_ORIGIN,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true 
-  };
-  
-app.use(cors(corsOptions));
+
 
 // Temporary storage for verification codes
 const users = {};
